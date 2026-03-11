@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: news-api
+  namespace: app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: news-api
+  template:
+    metadata:
+      labels:
+        app: news-api
+    spec:
+      containers:
+      - name: news-api
+        image: zurang/news-api:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5001
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 5001
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 5001
+          initialDelaySeconds: 15
+          periodSeconds: 10

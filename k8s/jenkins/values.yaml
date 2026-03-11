@@ -1,0 +1,42 @@
+controller:
+  admin:
+    createSecret: true
+    username: admin
+    password: admin1234
+
+  serviceType: ClusterIP
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hostName: jenkins.labs.local
+    path: /
+    pathType: Prefix
+
+  installPlugins:
+    - kubernetes
+    - workflow-aggregator
+    - git
+    - github
+    - docker-workflow
+    - credentials-binding
+    - plain-credentials
+    - matrix-auth
+    - ws-cleanup
+
+  persistence:
+    enabled: true
+    storageClass: nfs-client
+    size: 8Gi
+
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1"
+      memory: "2Gi"
+
+serviceAccount:
+  create: false
+  name: jenkins-deployer

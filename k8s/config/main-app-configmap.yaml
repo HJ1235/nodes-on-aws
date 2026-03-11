@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: main-app-config
+  namespace: app
+data:
+  UPLOAD_FOLDER: "/tmp/uploads"
