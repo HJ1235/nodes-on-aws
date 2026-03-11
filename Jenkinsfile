@@ -12,15 +12,15 @@ spec:
   serviceAccountName: jenkins-deployer
   containers:
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:latest
+    image: 'gcr.io/kaniko-project/executor:debug'
     command:
-    - /busybox/cat
+    - '/busybox/cat'
     tty: true
     volumeMounts:
     - name: docker-config
       mountPath: /kaniko/.docker
   - name: kubectl
-    image: bitnami/kubectl:1.32
+    image: 'bitnami/kubectl:latest'
     command:
     - /bin/sh
     - -c
